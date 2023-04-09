@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "0302ea77-b442-4223-804c-b04453eb0eea": {
+      "ProjectGuid": "0302ea77-b442-4223-804c-b04453eb0eea",
+      "DisplayName": "ApiTemplate",
+      "ColorIndex": 0
+    },
+    "07c79e2a-c4b2-4975-8850-0ea73ea5983d": {
+      "ProjectGuid": "07c79e2a-c4b2-4975-8850-0ea73ea5983d",
+      "DisplayName": "ModelsDB",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

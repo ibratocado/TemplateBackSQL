@@ -1,3 +1,5 @@
+using ApiTemplate.Services;
+using ApiTemplate.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -11,13 +13,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiTemplate", Version = "v1" });
+    c.EnableAnnotations();//con esto se vuelven visibles las anotaciones 
+    c.SwaggerDoc("v1", new OpenApiInfo 
+    { 
+        Title = "ApiTemplate"
+    });
     //Configuracion de Swagger para que resiva el JWT 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Name = "Authorization JWT",
+        Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
         BearerFormat = "JWT",
@@ -71,6 +78,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false
     };
 });
+
+//Inyeccion de dependencias 
+builder.Services.AddScoped<IAccountVerifyService, AccountVerifyService>();
 
 //Configuracion Cors
 builder.Services.AddCors();

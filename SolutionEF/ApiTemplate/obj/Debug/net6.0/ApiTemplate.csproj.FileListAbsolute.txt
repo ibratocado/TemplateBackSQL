@@ -40,3 +40,4 @@ C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\obj\Debug\
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\obj\Debug\net6.0\ref\ApiTemplate.dll
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\obj\Debug\net6.0\ApiTemplate.pdb
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\obj\Debug\net6.0\ApiTemplate.genruntimeconfig.cache
+C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll
