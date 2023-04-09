@@ -32,3 +32,4 @@ C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ApiTemplate\obj\De
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ApiTemplate\obj\Debug\net6.0\ref\ApiTemplate.dll
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ApiTemplate\obj\Debug\net6.0\ApiTemplate.pdb
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ApiTemplate\obj\Debug\net6.0\ApiTemplate.genruntimeconfig.cache
+C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ApiTemplate\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll
