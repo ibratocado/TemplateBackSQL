@@ -5,7 +5,12 @@
       "ProjectGuid": "7a65d73f-8214-4e81-bd7e-179b1b12c7e4",
       "DisplayName": "ApiTemplate",
       "ColorIndex": 0
+    },
+    "3a9b70c2-fc45-460e-9176-9df1f7f7ba5c": {
+      "ProjectGuid": "3a9b70c2-fc45-460e-9176-9df1f7f7ba5c",
+      "DisplayName": "ModelsDB",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

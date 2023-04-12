@@ -34,11 +34,11 @@ namespace ApiTemplate.Services
             var acount = ""; //await _context.Clients.FirstOrDefaultAsync(i => i.AccountId == aut.Id);
 
             if (autent == null || acount == null)
-                return Task<object>.Factory.StartNew(()=> { return "User No Content"; });
+                return Task<object>.Factory.StartNew(()=> { return "Usuario No Encontrado"; });
 
             List<object> claims = new List<object>();
 
-            return CreateBearer(claims,kiss);
+            return  await Task<object>.Factory.StartNew(()=> { return CreateBearer(claims, kiss); });
 
             
         }
