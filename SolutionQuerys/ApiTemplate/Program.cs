@@ -14,6 +14,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+//Inyeccion de depnedencias
+builder.Services.AddScoped<IDbContextService, DbContextService>();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.EnableAnnotations();//con esto se vuelven visibles las anotaciones 
@@ -49,12 +52,6 @@ builder.Services.AddSwaggerGen(c =>
                     }
                 });
 });
-
-/*Inyeccion de la cadena de conexion
-builder.Services.AddDbContext<Clase de contexto>(options => {
-    var conection = builder.Configuration.GetConnectionString(nombre de la cadena de conexion);
-    options.UseSqlServer(conection);
-});*/
 
 //Configracion para traer la key del JWT
 builder.Configuration.AddJsonFile("appsettings.json");

@@ -10,6 +10,11 @@
       "ProjectGuid": "07c79e2a-c4b2-4975-8850-0ea73ea5983d",
       "DisplayName": "ModelsDB",
       "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Archivos varios",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 2
