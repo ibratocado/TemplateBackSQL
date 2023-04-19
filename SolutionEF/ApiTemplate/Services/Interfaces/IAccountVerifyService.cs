@@ -4,6 +4,6 @@ namespace ApiTemplate.Services.Interfaces
 {
     public interface IAccountVerifyService
     {
-        Task<Object> GetValidate(RequestAccount data);
+        Task<Object> GetValidate(AccountRequest data);
     }
 }

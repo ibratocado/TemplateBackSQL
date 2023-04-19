@@ -1,6 +1,8 @@
+using ApiTemplate;
 using ApiTemplate.Services;
 using ApiTemplate.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -50,11 +52,11 @@ builder.Services.AddSwaggerGen(c =>
                 });
 });
 
-/*Inyeccion de la cadena de conexion
-builder.Services.AddDbContext<Clase de contexto>(options => {
-    var conection = builder.Configuration.GetConnectionString(nombre de la cadena de conexion);
+//Inyeccion de la cadena de conexion
+builder.Services.AddDbContext<Db_TemplateContext>(options => {
+    var conection = builder.Configuration.GetConnectionString(@"database");
     options.UseSqlServer(conection);
-});*/
+});
 
 //Configracion para traer la key del JWT
 builder.Configuration.AddJsonFile("appsettings.json");

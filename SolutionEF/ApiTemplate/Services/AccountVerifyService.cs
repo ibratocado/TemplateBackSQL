@@ -6,15 +6,18 @@ using System;
 using System.Security;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiTemplate.Services
 {
     public class AccountVerifyService : IAccountVerifyService
     {
         private readonly SecureString? _verify;
+        private readonly Db_TemplateContext _templateContext;
 
-        public AccountVerifyService(IConfiguration configuration)
+        public AccountVerifyService(IConfiguration configuration, Db_TemplateContext templateContext)
         {
+            _templateContext = templateContext;
             //Se trae la key para la creacion del claim de jwt
             _verify = new SecureString();
             var arg = configuration.GetSection("settings").GetSection("key").ToString().ToArray();
@@ -22,40 +25,39 @@ namespace ApiTemplate.Services
             Array.ForEach( arg, _verify.AppendChar);
         }
 
-        public async Task<object> GetValidate(RequestAccount data)
+        public async Task<object> GetValidate(AccountRequest data)
         {
+            var anyExist = await _templateContext.Accounts.AnyAsync(i => i.Acount == data.account && data.pount.Equals(i.Pount));
+            if (anyExist)
+                return Task<object>.Factory.StartNew(() => { return "Usuario No Encontrado"; });
+
             //Checamos que la key no venga vacia
             if (_verify != null)
                 return Task<object>.Factory.StartNew(() => { return "Error de servicios"; });
 
             //Traemos los datos del usuario y cuenta 
-            var kiss = _verify.Copy().ToString();
-            var autent = ""; //await _context.Accounts.FirstOrDefaultAsync(i => i.Count == data.account && i.Pount == data.pount);
-            var acount = ""; //await _context.Clients.FirstOrDefaultAsync(i => i.AccountId == aut.Id);
+            var autent = await _templateContext.Accounts.
+                                    Include(i=> i.Role).
+                                    FirstOrDefaultAsync(i => i.Acount == data.account && data.pount.Equals(i.Pount));
+            //var acount = ""; //await _context.Clients.FirstOrDefaultAsync(i => i.AccountId == aut.Id);
 
-            if (autent == null || acount == null)
-                return Task<object>.Factory.StartNew(()=> { return "Usuario No Encontrado"; });
-
-            List<object> claims = new List<object>();
-
-            return  await Task<object>.Factory.StartNew(()=> { return CreateBearer(claims, kiss); });
-
+            return  await Task<object>.Factory.StartNew(()=> { return CreateBearer(autent); });
             
         }
 
-        private string CreateBearer(List<object> data, string kiss)
+        private string CreateBearer(Account data)
         {
             try
             {
+                var kiss = _verify.Copy().ToString();
                 //Transformamos la key en un arreglo de bytes y creamos el claim
                 var bytes = Encoding.ASCII.GetBytes(kiss);
                 var claim = new ClaimsIdentity();
 
                 //Asignamos los cleims que se regresaran 
-                data.ForEach(item =>
-                {
-                    claim.AddClaim(new Claim("data[0].parameter", "data[0].data"));
-                });
+                claim.AddClaim(new Claim(ClaimTypes.NameIdentifier, data.Id.ToString()));
+                claim.AddClaim(new Claim("Role", data.RoleId.ToString()));
+                claim.AddClaim(new Claim(ClaimTypes.Expiration, DateTime.UtcNow.AddDays(10).ToString()));
 
 
                 //Creamos la descripcion del token, ponemos duracion y su algoritmo de codificaicon

@@ -1,4 +1,5 @@
-﻿using ApiTemplate.DTO.Respon;
+﻿using ApiTemplate.DTO.Request;
+using ApiTemplate.DTO.Respon;
 using ApiTemplate.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,9 +22,9 @@ namespace ApiTemplate.Controllers
 
         // POST api/<AccountController>
         [HttpPost]
-        [SwaggerOperation(Summary = "Loggin",Description = "Verifica que las credenciales mandadas sean existentes ademas regresa un token")]
-       
-        public ActionResult<GenericRespon> Post([FromBody] string value)
+        [SwaggerOperation(Summary = "Loggin",
+            Description = "Verifica que las credenciales mandadas sean existentes ademas regresa un token")]
+        public ActionResult<GenericRespon> Post([FromBody] AccountRequest value)
         {
             return StatusCode(StatusCodes.Status200OK, new { respon = new GenericRespon()});
         }
