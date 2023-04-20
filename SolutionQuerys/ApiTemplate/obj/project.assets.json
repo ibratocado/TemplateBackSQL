@@ -326,6 +326,16 @@
             "rid": "win"
           }
         }
+      },
+      "ModelsDB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/ModelsDB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ModelsDB.dll": {}
+        }
       }
     }
   },
@@ -1059,11 +1069,17 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "ModelsDB/1.0.0": {
+      "type": "project",
+      "path": "../ModelsDB/ModelsDB.csproj",
+      "msbuildProject": "../ModelsDB/ModelsDB.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.15",
+      "ModelsDB >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "Swashbuckle.AspNetCore.Annotations >= 6.5.0",
       "System.Data.SqlClient >= 4.8.5"
@@ -1100,7 +1116,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionQuerys\\ModelsDB\\ModelsDB.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionQuerys\\ModelsDB\\ModelsDB.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

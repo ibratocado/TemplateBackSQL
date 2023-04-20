@@ -1,9 +1,10 @@
 ﻿using ApiTemplate.DTO.Request;
+using ApiTemplate.DTO.Respon;
 
 namespace ApiTemplate.Services.Interfaces
 {
     public interface IAccountVerifyService
     {
-        Task<Object> GetValidate(AccountRequest data);
+        Task<GenericRespon> GetValidate(AccountRequest data);
     }
 }

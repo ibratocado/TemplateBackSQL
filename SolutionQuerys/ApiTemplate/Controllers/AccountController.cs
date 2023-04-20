@@ -1,4 +1,5 @@
-﻿using ApiTemplate.DTO.Respon;
+﻿using ApiTemplate.DTO.Request;
+using ApiTemplate.DTO.Respon;
 using ApiTemplate.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -23,9 +24,10 @@ namespace ApiTemplate.Controllers
         [HttpPost]
         [SwaggerOperation(Summary = "Loggin",Description = "Verifica que las credenciales mandadas sean existentes ademas regresa un token")]
        
-        public ActionResult<GenericRespon> Post([FromBody] string value)
+        public async Task<ActionResult<GenericRespon>> Post([FromBody] AccountRequest model)
         {
-            return StatusCode(StatusCodes.Status200OK, new { respon = new GenericRespon()});
+            GenericRespon respon = await _accountVerifyService.GetValidate(model);
+            return StatusCode(respon.State, new { respon = respon});
         }
     }
 }

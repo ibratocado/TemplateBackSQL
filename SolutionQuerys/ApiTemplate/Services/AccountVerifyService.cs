@@ -6,56 +6,131 @@ using System;
 using System.Security;
 using System.Security.Claims;
 using System.Text;
+using System.Data.SqlClient;
+using System.Data;
+using ModelsDB;
+using ApiTemplate.DTO.Respon;
 
 namespace ApiTemplate.Services
 {
     public class AccountVerifyService : IAccountVerifyService
     {
         private readonly SecureString? _verify;
+        private readonly IDbContextService _contextDB;
+        private SqlDataReader? _read;
+        private readonly SqlCommand _command;
 
-        public AccountVerifyService(IConfiguration configuration)
+        public AccountVerifyService(IConfiguration configuration, IDbContextService contextDB)
         {
             //Se trae la key para la creacion del claim de jwt
             _verify = new SecureString();
             var arg = configuration.GetSection("settings").GetSection("key").ToString().ToArray();
             //Despues se convierte la key en un secure string
-            Array.ForEach( arg, _verify.AppendChar);
+            Array.ForEach( arg.ToArray(), _verify.AppendChar);
+
+            _contextDB = contextDB;
+            _command = new SqlCommand();
         }
 
-        public async Task<object> GetValidate(RequestAccount data)
+        public async Task<GenericRespon> GetValidate(AccountRequest data)
         {
+
+            var respon = new GenericRespon();
+            var exits = await GetExitsAccount(data);
+            if (!exits)
+                return await Task<GenericRespon>.Factory.StartNew(() =>
+                {
+                    respon.State = 203;
+                    respon.Message = "User No Content";
+                    return respon;
+                });
+
             //Checamos que la key no venga vacia
-            if (_verify != null)
-                return Task<object>.Factory.StartNew(() => { return "Error de servicios"; });
+            if (_verify.Length <= 0)
+                return await Task<GenericRespon>.Factory.StartNew(() =>
+                {
+                    respon.State = 503;
+                    respon.Message = "Service Error";
+                    return respon;
+                });
 
             //Traemos los datos del usuario y cuenta 
-            var kiss = _verify.Copy().ToString();
-            var autent = ""; //await _context.Accounts.FirstOrDefaultAsync(i => i.Count == data.account && i.Pount == data.pount);
-            var acount = ""; //await _context.Clients.FirstOrDefaultAsync(i => i.AccountId == aut.Id);
 
-            if (autent == null || acount == null)
-                return Task<object>.Factory.StartNew(()=> { return "User No Content"; });
+            var autent = await GetAccountVerify(data); //await _context.Accounts.FirstOrDefaultAsync(i => i.Count == data.account && i.Pount == data.pount);
+            //var acount = ""; //await _context.Clients.FirstOrDefaultAsync(i => i.AccountId == aut.Id);
 
-            List<object> claims = new List<object>();
 
-            return CreateBearer(claims,kiss);
+            return await Task<GenericRespon>.Factory.StartNew(() => 
+            { 
+                respon.State = 200; 
+                respon.Message = "Consultado Correctamente"; 
+                respon.Data = CreateBearer(autent); 
+                return respon;
+            });
 
             
         }
 
-        private string CreateBearer(List<object> data, string kiss)
+        private async Task<bool> GetExitsAccount(AccountRequest data)
+        {
+            return await Task<bool>.Factory.StartNew(() =>
+            {
+                _command.Connection = _contextDB.OpenConection();
+                _command.CommandText = "existAccount";
+                _command.CommandType = CommandType.StoredProcedure;
+                _command.Parameters.AddWithValue("@count", data.account);
+                _command.Parameters.AddWithValue("@pount", data.pount);
+                _read = _command.ExecuteReader();
+
+                bool success = false;
+                while(_read.Read())
+                {
+                    success = _read.GetBoolean(0);
+                }
+                _command.Parameters.Clear();
+                _command.Connection = _contextDB.CloseConection();
+
+                return success;
+            });
+        }
+
+        private async Task<AccountModel> GetAccountVerify(AccountRequest data)
+        {
+            return await Task<AccountModel>.Factory.StartNew(() =>
+            {
+                _command.Connection = _contextDB.OpenConection();
+                _command.CommandText = "accountVerify";
+                _command.CommandType = CommandType.StoredProcedure;
+                _command.Parameters.AddWithValue("@count", data.account);
+                _command.Parameters.AddWithValue("@pount", data.pount);
+                _read = _command.ExecuteReader();
+
+               var model = new AccountModel();
+                while (_read.Read())
+                {
+                    model.Id = _read.GetGuid(0);
+                    model.RoleId = _read.GetInt32(1);
+                }
+                _command.Parameters.Clear();
+                _command.Connection = _contextDB.CloseConection();
+
+                return model;
+            });
+        }
+
+        private string CreateBearer(AccountModel data)
         {
             try
             {
+                var kiss = _verify.Copy().ToString();
                 //Transformamos la key en un arreglo de bytes y creamos el claim
                 var bytes = Encoding.ASCII.GetBytes(kiss);
                 var claim = new ClaimsIdentity();
 
                 //Asignamos los cleims que se regresaran 
-                data.ForEach(item =>
-                {
-                    claim.AddClaim(new Claim("data[0].parameter", "data[0].data"));
-                });
+                claim.AddClaim(new Claim(ClaimTypes.NameIdentifier, data.Id.ToString()));
+                claim.AddClaim(new Claim("Role", data.RoleId.ToString()));
+                claim.AddClaim(new Claim(ClaimTypes.Expiration, DateTime.UtcNow.AddDays(10).ToString()));
 
 
                 //Creamos la descripcion del token, ponemos duracion y su algoritmo de codificaicon

@@ -7,6 +7,7 @@ using System.Security;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using ApiTemplate.DTO.Respon;
 
 namespace ApiTemplate.Services
 {
@@ -25,15 +26,26 @@ namespace ApiTemplate.Services
             Array.ForEach( arg, _verify.AppendChar);
         }
 
-        public async Task<object> GetValidate(AccountRequest data)
+        public async Task<GenericRespon> GetValidate(AccountRequest data)
         {
+            var respon = new GenericRespon();
             var anyExist = await _templateContext.Accounts.AnyAsync(i => i.Acount == data.account && data.pount.Equals(i.Pount));
-            if (anyExist)
-                return Task<object>.Factory.StartNew(() => { return "Usuario No Encontrado"; });
+            if (!anyExist)
+                return await Task<GenericRespon>.Factory.StartNew(() =>
+                {
+                    respon.State = 203;
+                    respon.Message = "User No Content";
+                    return respon;
+                });
 
             //Checamos que la key no venga vacia
-            if (_verify != null)
-                return Task<object>.Factory.StartNew(() => { return "Error de servicios"; });
+            if (_verify.Length <= 0)
+                return await Task<GenericRespon>.Factory.StartNew(() =>
+                {
+                    respon.State = 503;
+                    respon.Message = "Service Error";
+                    return respon;
+                });
 
             //Traemos los datos del usuario y cuenta 
             var autent = await _templateContext.Accounts.
@@ -41,8 +53,14 @@ namespace ApiTemplate.Services
                                     FirstOrDefaultAsync(i => i.Acount == data.account && data.pount.Equals(i.Pount));
             //var acount = ""; //await _context.Clients.FirstOrDefaultAsync(i => i.AccountId == aut.Id);
 
-            return  await Task<object>.Factory.StartNew(()=> { return CreateBearer(autent); });
-            
+            return await Task<GenericRespon>.Factory.StartNew(() =>
+            {
+                respon.State = 200;
+                respon.Message = "Consultado Correctamente";
+                respon.Data = CreateBearer(autent);
+                return respon;
+            });
+
         }
 
         private string CreateBearer(Account data)

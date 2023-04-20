@@ -45,10 +45,7 @@ builder.Services.AddSwaggerGen(c =>
                                 Id = "Bearer"
                             }
                         },
-                        new string[]
-                        {
-
-                        }
+                        new string[] {}
                     }
                 });
 });
@@ -75,6 +72,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false
     };
 });
+
+//Inyeccion de Contexto
+builder.Services.AddSingleton<IDbContextService, DbContextService>();
 
 //Inyeccion de dependencias 
 builder.Services.AddScoped<IAccountVerifyService, AccountVerifyService>();

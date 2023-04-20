@@ -30,8 +30,8 @@ namespace ApiTemplate.Services
 
         public SqlConnection OpenConection()
         {
-            if (conexion.State == ConnectionState.Open)
-                conexion.Close();
+            if (conexion.State == ConnectionState.Closed)
+                conexion.Open();
             return conexion;
         }
     }

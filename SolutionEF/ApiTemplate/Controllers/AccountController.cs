@@ -24,9 +24,10 @@ namespace ApiTemplate.Controllers
         [HttpPost]
         [SwaggerOperation(Summary = "Loggin",
             Description = "Verifica que las credenciales mandadas sean existentes ademas regresa un token")]
-        public ActionResult<GenericRespon> Post([FromBody] AccountRequest value)
+        public async Task<ActionResult<GenericRespon>> Post([FromBody] AccountRequest value)
         {
-            return StatusCode(StatusCodes.Status200OK, new { respon = new GenericRespon()});
+            var respon = await _accountVerifyService.GetValidate(value);
+            return StatusCode(StatusCodes.Status200OK, new { respon = respon});
         }
     }
 }
