@@ -29,7 +29,6 @@ builder.Services.AddSwaggerGen(c =>
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
-        BearerFormat = "JWT",
         In = ParameterLocation.Header
     });
     //Se agrega a seguridad requerida
@@ -44,10 +43,7 @@ builder.Services.AddSwaggerGen(c =>
                                 Id = "Bearer"
                             }
                         },
-                        new string[]
-                        {
-
-                        }
+                         Array.Empty<string>()
                     }
                 });
 });
@@ -83,6 +79,8 @@ builder.Services.AddAuthentication(options =>
 
 //Inyeccion de dependencias 
 builder.Services.AddScoped<IAccountVerifyService, AccountVerifyService>();
+builder.Services.AddScoped<IRenglonesService, RenglonesService>();
+builder.Services.AddScoped<IArticulosService, ArticulosService>();
 
 //Configuracion Cors
 builder.Services.AddCors();

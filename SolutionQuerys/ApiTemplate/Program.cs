@@ -1,6 +1,7 @@
-using ApiTemplate.Services;
+﻿using ApiTemplate.Services;
 using ApiTemplate.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -8,14 +9,24 @@ using System.Text;
 #region Builder
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var misReglasCors = "ReglasCors";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: misReglasCors,
+                      builder =>
+                      {
+                          builder.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
 
+
+                      });
+});
+
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-//Inyeccion de depnedencias
-builder.Services.AddScoped<IDbContextService, DbContextService>();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -50,37 +61,36 @@ builder.Services.AddSwaggerGen(c =>
                 });
 });
 
+
 //Configracion para traer la key del JWT
 builder.Configuration.AddJsonFile("appsettings.json");
-var key = builder.Configuration.GetSection("settings").GetSection("key").ToString();
-var encoding = Encoding.UTF8.GetBytes(key);
+var secretKey = builder.Configuration.GetSection("settings").GetSection("secretKey").ToString();// "=Codig0Estudiant3=";
+var keyBytes = Encoding.UTF8.GetBytes(secretKey);
 
-//Configuracoion de el JWT
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false;
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthentication(config => {
+
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(config => {
+    config.RequireHttpsMetadata = false;
+    config.SaveToken = false;
+    config.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(encoding),
+        IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
         ValidateIssuer = false,
         ValidateAudience = false
     };
 });
 
-//Inyeccion de Contexto
-builder.Services.AddSingleton<IDbContextService, DbContextService>();
+
+//inyeccion de contexto
+builder.Services.AddTransient<IDbContextService, DbContextService>();
 
 //Inyeccion de dependencias 
 builder.Services.AddScoped<IAccountVerifyService, AccountVerifyService>();
+builder.Services.AddScoped<IArticulosService, ArticulosService>();
 
-//Configuracion Cors
-builder.Services.AddCors();
 #endregion
 
 var app = builder.Build();
@@ -93,8 +103,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //Configuracion de cors para entrada de todos los origenes 
-app.UseCors(options =>
-options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+app.UseCors(misReglasCors);
 
 app.UseHttpsRedirection();
 

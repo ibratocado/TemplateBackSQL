@@ -13,17 +13,15 @@ namespace ApiTemplate.Services
 {
     public class AccountVerifyService : IAccountVerifyService
     {
-        private readonly SecureString? _verify;
+        private readonly string? _verify;
         private readonly Db_TemplateContext _templateContext;
 
         public AccountVerifyService(IConfiguration configuration, Db_TemplateContext templateContext)
         {
             _templateContext = templateContext;
             //Se trae la key para la creacion del claim de jwt
-            _verify = new SecureString();
-            var arg = configuration.GetSection("settings").GetSection("key").ToString().ToArray();
-            //Despues se convierte la key en un secure string
-            Array.ForEach( arg, _verify.AppendChar);
+            _verify = configuration.GetSection("settings").GetSection("key").ToString();
+            
         }
 
         public async Task<GenericRespon> GetValidate(AccountRequest data)
@@ -31,21 +29,27 @@ namespace ApiTemplate.Services
             var respon = new GenericRespon();
             var anyExist = await _templateContext.Accounts.AnyAsync(i => i.Acount == data.account && data.pount.Equals(i.Pount));
             if (!anyExist)
-                return await Task<GenericRespon>.Factory.StartNew(() =>
+            {
+                respon.State = 203;
+                respon.Message = "User No Content";
+                return respon;
+            }
+                /*return await Task<GenericRespon>.Factory.StartNew(() =>
                 {
-                    respon.State = 203;
-                    respon.Message = "User No Content";
-                    return respon;
-                });
+                   
+                });*/
 
             //Checamos que la key no venga vacia
             if (_verify.Length <= 0)
-                return await Task<GenericRespon>.Factory.StartNew(() =>
+            {
+                respon.State = 503;
+                respon.Message = "Service Error";
+                return respon;
+            }
+                /*return await Task<GenericRespon>.Factory.StartNew(() =>
                 {
-                    respon.State = 503;
-                    respon.Message = "Service Error";
-                    return respon;
-                });
+                    
+                });*/
 
             //Traemos los datos del usuario y cuenta 
             var autent = await _templateContext.Accounts.
@@ -53,13 +57,15 @@ namespace ApiTemplate.Services
                                     FirstOrDefaultAsync(i => i.Acount == data.account && data.pount.Equals(i.Pount));
             //var acount = ""; //await _context.Clients.FirstOrDefaultAsync(i => i.AccountId == aut.Id);
 
-            return await Task<GenericRespon>.Factory.StartNew(() =>
+            /*return await Task<GenericRespon>.Factory.StartNew(() =>
             {
-                respon.State = 200;
-                respon.Message = "Consultado Correctamente";
-                respon.Data = CreateBearer(autent);
-                return respon;
-            });
+               
+            });*/
+
+            respon.State = 200;
+            respon.Message = "Consultado Correctamente";
+            respon.Data = CreateBearer(autent);
+            return respon;
 
         }
 
@@ -67,7 +73,7 @@ namespace ApiTemplate.Services
         {
             try
             {
-                var kiss = _verify.Copy().ToString();
+                var kiss = _verify;
                 //Transformamos la key en un arreglo de bytes y creamos el claim
                 var bytes = Encoding.ASCII.GetBytes(kiss);
                 var claim = new ClaimsIdentity();

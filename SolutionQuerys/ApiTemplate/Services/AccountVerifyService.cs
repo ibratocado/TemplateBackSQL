@@ -1,7 +1,7 @@
 ﻿using ApiTemplate.DTO.Request;
 using ApiTemplate.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+
 using System;
 using System.Security;
 using System.Security.Claims;
@@ -10,12 +10,13 @@ using System.Data.SqlClient;
 using System.Data;
 using ModelsDB;
 using ApiTemplate.DTO.Respon;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ApiTemplate.Services
 {
     public class AccountVerifyService : IAccountVerifyService
     {
-        private readonly SecureString? _verify;
+        private readonly string _verify;
         private readonly IDbContextService _contextDB;
         private SqlDataReader? _read;
         private readonly SqlCommand _command;
@@ -23,10 +24,7 @@ namespace ApiTemplate.Services
         public AccountVerifyService(IConfiguration configuration, IDbContextService contextDB)
         {
             //Se trae la key para la creacion del claim de jwt
-            _verify = new SecureString();
-            var arg = configuration.GetSection("settings").GetSection("key").ToString().ToArray();
-            //Despues se convierte la key en un secure string
-            Array.ForEach( arg.ToArray(), _verify.AppendChar);
+            _verify = configuration.GetSection("settings").GetSection("secretKey").ToString();
 
             _contextDB = contextDB;
             _command = new SqlCommand();
@@ -122,7 +120,7 @@ namespace ApiTemplate.Services
         {
             try
             {
-                var kiss = _verify.Copy().ToString();
+                string kiss = _verify;
                 //Transformamos la key en un arreglo de bytes y creamos el claim
                 var bytes = Encoding.ASCII.GetBytes(kiss);
                 var claim = new ClaimsIdentity();
@@ -130,7 +128,6 @@ namespace ApiTemplate.Services
                 //Asignamos los cleims que se regresaran 
                 claim.AddClaim(new Claim(ClaimTypes.NameIdentifier, data.Id.ToString()));
                 claim.AddClaim(new Claim("Role", data.RoleId.ToString()));
-                claim.AddClaim(new Claim(ClaimTypes.Expiration, DateTime.UtcNow.AddDays(10).ToString()));
 
 
                 //Creamos la descripcion del token, ponemos duracion y su algoritmo de codificaicon
