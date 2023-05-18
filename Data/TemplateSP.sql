@@ -19,9 +19,3 @@ CREATE OR ALTER PROCEDURE existAccount (@count VARCHAR(30), @pount VARCHAR(30))
 		WHERE accounts.acount = @count AND accounts.pount = @pount;
 		RETURN;
 		END
-
-GO
-
-exec existAccount 'jaun','1234'
-
-alter table rols alter column description varchar(50);

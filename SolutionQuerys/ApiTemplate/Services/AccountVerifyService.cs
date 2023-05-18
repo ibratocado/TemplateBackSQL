@@ -15,7 +15,7 @@ namespace ApiTemplate.Services
 {
     public class AccountVerifyService : IAccountVerifyService
     {
-        private readonly SecureString? _verify;
+        private readonly string _verify;
         private readonly IDbContextService _contextDB;
         private SqlDataReader? _read;
         private readonly SqlCommand _command;
@@ -23,10 +23,7 @@ namespace ApiTemplate.Services
         public AccountVerifyService(IConfiguration configuration, IDbContextService contextDB)
         {
             //Se trae la key para la creacion del claim de jwt
-            _verify = new SecureString();
-            var arg = configuration.GetSection("settings").GetSection("key").ToString().ToArray();
-            //Despues se convierte la key en un secure string
-            Array.ForEach( arg.ToArray(), _verify.AppendChar);
+            _verify = configuration.GetSection("settings").GetSection("key").ToString();
 
             _contextDB = contextDB;
             _command = new SqlCommand();
@@ -122,9 +119,8 @@ namespace ApiTemplate.Services
         {
             try
             {
-                var kiss = _verify.Copy().ToString();
                 //Transformamos la key en un arreglo de bytes y creamos el claim
-                var bytes = Encoding.ASCII.GetBytes(kiss);
+                var bytes = Encoding.ASCII.GetBytes(_verify);
                 var claim = new ClaimsIdentity();
 
                 //Asignamos los cleims que se regresaran 

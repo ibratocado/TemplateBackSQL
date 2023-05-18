@@ -13,17 +13,14 @@ namespace ApiTemplate.Services
 {
     public class AccountVerifyService : IAccountVerifyService
     {
-        private readonly SecureString? _verify;
+        private readonly string _verify;
         private readonly Db_TemplateContext _templateContext;
 
         public AccountVerifyService(IConfiguration configuration, Db_TemplateContext templateContext)
         {
             _templateContext = templateContext;
             //Se trae la key para la creacion del claim de jwt
-            _verify = new SecureString();
-            var arg = configuration.GetSection("settings").GetSection("key").ToString().ToArray();
-            //Despues se convierte la key en un secure string
-            Array.ForEach( arg, _verify.AppendChar);
+            _verify = configuration.GetSection("settings").GetSection("key").ToString();
         }
 
         public async Task<GenericRespon> GetValidate(AccountRequest data)
@@ -67,9 +64,8 @@ namespace ApiTemplate.Services
         {
             try
             {
-                var kiss = _verify.Copy().ToString();
                 //Transformamos la key en un arreglo de bytes y creamos el claim
-                var bytes = Encoding.ASCII.GetBytes(kiss);
+                var bytes = Encoding.ASCII.GetBytes(_verify);
                 var claim = new ClaimsIdentity();
 
                 //Asignamos los cleims que se regresaran 
