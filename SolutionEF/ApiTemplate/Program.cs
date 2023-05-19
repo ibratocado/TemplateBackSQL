@@ -1,4 +1,5 @@
 using ApiTemplate;
+using ApiTemplate.DTO.Request;
 using ApiTemplate.Services;
 using ApiTemplate.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -83,6 +84,7 @@ builder.Services.AddAuthentication(options =>
 
 //Inyeccion de dependencias 
 builder.Services.AddScoped<IAccountVerifyService, AccountVerifyService>();
+builder.Services.AddScoped<IGenericCRUD<StoreAddRequest,StoreUpdateRequest>, StoreService>();
 
 //Configuracion Cors
 builder.Services.AddCors();
