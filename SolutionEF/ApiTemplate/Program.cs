@@ -84,7 +84,12 @@ builder.Services.AddAuthentication(options =>
 
 //Inyeccion de dependencias 
 builder.Services.AddScoped<IAccountVerifyService, AccountVerifyService>();
-builder.Services.AddScoped<IGenericCRUD<StoreAddRequest,StoreUpdateRequest>, StoreService>();
+builder.Services.AddScoped<IGenericCRUD<StoreAddRequest, StoreUpdateRequest>, StoreService>();
+builder.Services.AddScoped<IGenericCRUD<CustomerAddRequest, CustomerUpdateRequest>, CustomerService>();
+builder.Services.AddScoped<IGenericCRUD<ArticlesAddRequest, ArticlesUpdateRequest>, ArticleService>();
+builder.Services.AddScoped<IGenericCRUD<StoreArticleAddRequest, StoreArticleUpdateRequest>, StoreArticlesService>();
+builder.Services.AddScoped<IGenericCRUD<CustomerArticleAddRequest, CustomerArticleUpdateRequest>, CustomerArticlesService>();
+builder.Services.AddScoped<IFileService, FilesService>();
 
 //Configuracion Cors
 builder.Services.AddCors();
@@ -102,6 +107,8 @@ if (app.Environment.IsDevelopment())
 //Configuracion de cors para entrada de todos los origenes 
 app.UseCors(options =>
 options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+//Agregar para jalar archivos desde el wwwroot
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 

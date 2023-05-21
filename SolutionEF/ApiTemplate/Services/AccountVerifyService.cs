@@ -67,10 +67,11 @@ namespace ApiTemplate.Services
                 //Transformamos la key en un arreglo de bytes y creamos el claim
                 var bytes = Encoding.ASCII.GetBytes(_verify);
                 var claim = new ClaimsIdentity();
-
+                var customer = _templateContext.Customers.FirstOrDefault(c => c.Account == data.Id);
                 //Asignamos los cleims que se regresaran 
                 claim.AddClaim(new Claim(ClaimTypes.NameIdentifier, data.Id.ToString()));
                 claim.AddClaim(new Claim("Role", data.RoleId.ToString()));
+                claim.AddClaim(new Claim("Client", customer.Id.ToString()));
                 claim.AddClaim(new Claim(ClaimTypes.Expiration, DateTime.UtcNow.AddDays(10).ToString()));
 
 

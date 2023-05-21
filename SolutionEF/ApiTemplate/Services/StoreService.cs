@@ -1,4 +1,5 @@
-﻿using ApiTemplate.DTO.Request;
+﻿using ApiTemplate.DTO;
+using ApiTemplate.DTO.Request;
 using ApiTemplate.DTO.Respon;
 using ApiTemplate.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -116,7 +117,7 @@ namespace ApiTemplate.Services
             }
         }
 
-        public async Task<GenericRespon> GetById(Guid id)
+        public async Task<GenericRespon> GetById(Guid id, GenericPaginatorRequest? paginator)
         {
             GenericRespon respon = new GenericRespon();
 
@@ -144,23 +145,37 @@ namespace ApiTemplate.Services
             }
         }
 
-        public async Task<GenericRespon> GetFull()
+        public async Task<GenericRespon> GetFull(GenricPaginatorN paginator)
         {
             GenericRespon respon  = new GenericRespon();
 
             try
             {
-                var list = await _context.Stores.Where(i => i.Active == true).OrderBy(i => i.Branch).ToListAsync();
+                var list = await _context.Stores.Where(i => i.Active == true).
+                    Skip(paginator.Page).
+                    Take(paginator.RecordsByPage).
+                    OrderBy(i => i.Branch).ToListAsync();
                 if (list.Count < 0)
                 {
                     respon.State = StatusCodes.Status204NoContent;
                     respon.Message = "No Se Encontraron resultados";
                     return respon;
                 }
-                    
+
+                var totalRecord = await _context.Stores.CountAsync(i => i.Active == true);
+
+                GenericPaginatorRespon<Store> paginatorRespon = new GenericPaginatorRespon<Store>()
+                {
+                    Page = paginator.Page,
+                    RecordsByPage = paginator.RecordsByPage,
+                    TotalRecords = totalRecord,
+                    TotalPages = totalRecord / paginator.RecordsByPage,
+                    Data = list
+                };
+
                 respon.State = StatusCodes.Status200OK;
                 respon.Message = "Consultado Con Exito";
-                respon.Data = list;
+                respon.Data = paginatorRespon;
 
                 return respon;
             }

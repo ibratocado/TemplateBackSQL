@@ -2,11 +2,11 @@
 
 namespace ApiTemplate.DTO.Request
 {
-    public class StoreAddRequest
+    public class StoreArticleAddRequest
     {
         [Required]
-        public string? Branch { get; set; }
+        public Guid Store { get; set; }
         [Required]
-        public string? Addres { get; set; }
+        public Guid Article { get; set; }
     }
 }

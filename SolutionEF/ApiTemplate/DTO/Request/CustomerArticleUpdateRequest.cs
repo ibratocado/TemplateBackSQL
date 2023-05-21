@@ -2,13 +2,13 @@
 
 namespace ApiTemplate.DTO.Request
 {
-    public class StoreUpdateRequest
+    public class CustomerArticleUpdateRequest
     {
         [Required]
         public Guid Id { get; set; }
         [Required]
-        public string? Branch { get; set; }
+        public Guid Cuatomer { get; set; }
         [Required]
-        public string? Addres { get; set; }
+        public Guid Article { get; set; }
     }
 }

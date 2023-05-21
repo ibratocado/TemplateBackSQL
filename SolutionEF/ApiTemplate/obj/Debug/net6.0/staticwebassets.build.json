@@ -1,11 +1,71 @@
 {
   "Version": 1,
-  "Hash": "LJIAA3mvQ7B8wfdCfXwFMhb/eUdqpuAB2uWteC/B3Qg=",
+  "Hash": "EqiT6AjGmadheRvOD0/RlQIoWDmqTidN4tBk2WrJVKM=",
   "Source": "ApiTemplate",
   "BasePath": "_content/ApiTemplate",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "ApiTemplate\\wwwroot",
+      "Source": "ApiTemplate",
+      "ContentRoot": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\wwwroot\\",
+      "BasePath": "_content/ApiTemplate",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\wwwroot\\Articles\\Images\\382e766b-514e-4241-8380-c68f983e0457.jpg",
+      "SourceId": "ApiTemplate",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\wwwroot\\",
+      "BasePath": "_content/ApiTemplate",
+      "RelativePath": "Articles/Images/382e766b-514e-4241-8380-c68f983e0457.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Articles\\Images\\382e766b-514e-4241-8380-c68f983e0457.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\wwwroot\\Articles\\Images\\62969f12-5f1a-44a9-96c9-e5fdc326f277.jpg",
+      "SourceId": "ApiTemplate",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\wwwroot\\",
+      "BasePath": "_content/ApiTemplate",
+      "RelativePath": "Articles/Images/62969f12-5f1a-44a9-96c9-e5fdc326f277.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Articles\\Images\\62969f12-5f1a-44a9-96c9-e5fdc326f277.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\wwwroot\\Articles\\Images\\d498b85c-11e2-4e95-b1c7-c67fe4f8e23b.jpg",
+      "SourceId": "ApiTemplate",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\wwwroot\\",
+      "BasePath": "_content/ApiTemplate",
+      "RelativePath": "Articles/Images/d498b85c-11e2-4e95-b1c7-c67fe4f8e23b.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Articles\\Images\\d498b85c-11e2-4e95-b1c7-c67fe4f8e23b.jpg"
+    }
+  ]
 }

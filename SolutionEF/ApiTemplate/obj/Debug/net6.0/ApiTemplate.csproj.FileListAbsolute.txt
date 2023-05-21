@@ -65,3 +65,4 @@ C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\bin\Debug\
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\bin\Debug\net6.0\ModelsDB.dll
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\bin\Debug\net6.0\ModelsDB.pdb
+C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionEF\ApiTemplate\bin\Debug\net6.0\ApiTemplate.staticwebassets.runtime.json

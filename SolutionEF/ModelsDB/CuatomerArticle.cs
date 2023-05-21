@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApiTemplate
 {
@@ -11,6 +12,7 @@ namespace ApiTemplate
         public DateTime? Date { get; set; }
 
         public virtual Article? ArticleNavigation { get; set; }
+        [JsonIgnore]
         public virtual Customer? CuatomerNavigation { get; set; }
     }
 }

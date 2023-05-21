@@ -18,6 +18,7 @@ namespace ApiTemplate
         public string? Addres { get; set; }
         public bool Active { get; set; }
 
+        [JsonIgnore]
         public virtual Account? AccountNavigation { get; set; }
         [JsonIgnore]
         public virtual ICollection<CuatomerArticle> CuatomerArticles { get; set; }
