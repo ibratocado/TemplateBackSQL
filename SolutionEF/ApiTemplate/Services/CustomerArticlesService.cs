@@ -21,7 +21,11 @@ namespace ApiTemplate.Services
             {
                 foreach (var item in model.Articles)
                 {
-                    if (!await _context.CuatomerArticles.AnyAsync(i => i.Cuatomer == model.Cuatomer && i.Article == item))
+                    var artStock = await _context.Articles.FirstOrDefaultAsync(i=> i.Id == item);
+
+                    if (!await _context.CuatomerArticles.
+                        AnyAsync(i => i.Cuatomer == model.Cuatomer && 
+                        i.Article == item) && artStock != null)
                     {
                         CuatomerArticle article = new CuatomerArticle()
                         {
@@ -30,6 +34,11 @@ namespace ApiTemplate.Services
                             Article = item,
                             Date = DateTime.Now
                         };
+
+                        artStock.Stock --;
+
+                        _context.Entry(artStock).Property(i => i.Stock).IsModified = true;
+                        await _context.SaveChangesAsync();
 
                         _context.Add(article);
                         await _context.SaveChangesAsync();
