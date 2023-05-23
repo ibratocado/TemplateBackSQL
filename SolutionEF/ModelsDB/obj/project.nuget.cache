@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bB2GxfpmPHrtnVkfRSRCwraHWUwg2lzHqna+laymTLOg8XWzZrQGrAUYgY8TCpitf/2Pim7hvGhrbHQQ/9j5fA==",
+  "dgSpecHash": "7qCBIjCUVAhLiLm7yxeQ+LO+WTvfxJREVitKD1F8v6EvMvxgr9HpWZmZWa126p85fsayjJaakXhgKKLN4RmffQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ModelsDB\\ModelsDB.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Documents\\Repos\\Front\\TemplateBackSQL\\SolutionEF\\ModelsDB\\ModelsDB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

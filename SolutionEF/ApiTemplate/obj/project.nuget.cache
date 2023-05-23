@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tDJkyk6vJaaT5LZ1zgam7PfQSrPsodAIlsLkLj1FoFrwVwrlQfEOX5ySTjMMAjFjXzNlWcRkQM8jC4nK4Lbc8A==",
+  "dgSpecHash": "GeW75mG+e/faPJ5zh+frh47MXYbZxH/XV1iEepstBdHU+v/z01EcN/kjyCYvC6w6m0hy3OM2rkpwnp1jal4VNQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\ApiTemplate.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Documents\\Repos\\Front\\TemplateBackSQL\\SolutionEF\\ApiTemplate\\ApiTemplate.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.15\\microsoft.aspnetcore.authentication.jwtbearer.6.0.15.nupkg.sha512",
