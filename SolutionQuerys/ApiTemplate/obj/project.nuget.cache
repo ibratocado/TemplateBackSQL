@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Dk9G5azoYAtDbMWSF3fcH6Weg8Zfze0qBiga6yXAh/Cvaeuxbm2mztsKhBfxNDKPYW7obpPZILIxAIeE35LsQw==",
+  "dgSpecHash": "t7fNsN7+AlPxmahxi3h9R964A/R3t7eNnEsEqVSTdFgrZq80sXRYdQBZCDL2h6ywHa3h8LVJAoGbwWAzE8F37Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionQuerys\\ApiTemplate\\ApiTemplate.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Documents\\Repos\\TestSygno\\TemplateBackSQL\\SolutionQuerys\\ApiTemplate\\ApiTemplate.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.15\\microsoft.aspnetcore.authentication.jwtbearer.6.0.15.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

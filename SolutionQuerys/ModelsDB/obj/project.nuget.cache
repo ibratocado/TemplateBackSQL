@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ysr4Lek2w0H1yfFr8GrcV7/Y/fo9wHCV8clJGHdasoeAIyKYSKW3kkURTFH24/7ijDKDnG3TkR6sm2uXZWiU2A==",
+  "dgSpecHash": "ZkMwE7LuV2k5vqd+xJ0BL2/IuH9pCaksaLglpKfZ02OBpUqbWIbXPuDEtCDntD6mNrJD9kCxdskkN8yjPkB3vg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Documents\\Repos\\TemplateBackSQL\\SolutionQuerys\\ModelsDB\\ModelsDB.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Documents\\Repos\\TestSygno\\TemplateBackSQL\\SolutionQuerys\\ModelsDB\\ModelsDB.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

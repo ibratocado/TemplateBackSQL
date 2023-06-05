@@ -1,3 +1,5 @@
+using ApiTemplate.DTO.Request;
+using ApiTemplate.DTO.Respon;
 using ApiTemplate.Services;
 using ApiTemplate.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -78,6 +80,8 @@ builder.Services.AddSingleton<IDbContextService, DbContextService>();
 
 //Inyeccion de dependencias 
 builder.Services.AddScoped<IAccountVerifyService, AccountVerifyService>();
+builder.Services.AddScoped<IGenericCRUDService<AddUserRequest, UpdateUserRequest, GenericPaginatorRequest<string>, Guid>, UsersService>();
+builder.Services.AddScoped<IRolsService, RolsService>();
 
 //Configuracion Cors
 builder.Services.AddCors();

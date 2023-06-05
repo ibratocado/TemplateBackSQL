@@ -10,3 +10,15 @@ C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.dll
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ref\ModelsDB.dll
 C:\Users\Admin\Documents\Repos\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.pdb
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\bin\Debug\net6.0\ModelsDB.deps.json
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\bin\Debug\net6.0\ModelsDB.dll
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\bin\Debug\net6.0\ref\ModelsDB.dll
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\bin\Debug\net6.0\ModelsDB.pdb
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.AssemblyInfo.cs
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.dll
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ref\ModelsDB.dll
+C:\Users\Admin\Documents\Repos\TestSygno\TemplateBackSQL\SolutionQuerys\ModelsDB\obj\Debug\net6.0\ModelsDB.pdb
